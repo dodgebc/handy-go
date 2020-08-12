@@ -62,8 +62,8 @@ func (mon *Monitor) IncrementCounter(name string, n int) {
 	mon.countIterations = append(mon.countIterations, 1)
 }
 
-// RegisterCounters creates multiple secondary counters (not required unless a specific order is desired)
-func (mon *Monitor) RegisterCounters(names []string) {
+// StartCounters starts multiple secondary counters at zero (only necessary if specific order is desired)
+func (mon *Monitor) StartCounters(names []string) {
 	mon.mux.Lock()
 	defer mon.mux.Unlock()
 
@@ -80,8 +80,8 @@ func (mon *Monitor) Iteration() int {
 	return mon.iteration
 }
 
-// Count returns the current value of a counter
-func (mon *Monitor) Count(name string) int {
+// Counter returns the current value of a counter
+func (mon *Monitor) Counter(name string) int {
 	mon.mux.Lock()
 	defer mon.mux.Unlock()
 	for i := range mon.countKeys {

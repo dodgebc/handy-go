@@ -36,15 +36,15 @@ func TestCounter(t *testing.T) {
 
 func TestTwoCounters(t *testing.T) {
 
-	fmt.Println("Expecting:\t10 it\t4 it/s\ttoo big: 1\ttoo small: 2")
+	fmt.Println("Expecting:\t10 it\t4 it/s\ttoo big: 3\ttoo small: 4")
 	mon := NewMonitor("Progress")
-	mon.RegisterCounters([]string{"too big", "too small"})
+	mon.StartCounters([]string{"too big", "too small"})
 	for i := 0; i < 10; i++ {
 		mon.Increment(1)
-		if i < 2 {
+		if i < 4 {
 			mon.IncrementCounter("too small", 1)
 		}
-		if i > 8 {
+		if i > 6 {
 			mon.IncrementCounter("too big", 1)
 		}
 		time.Sleep(250 * time.Millisecond)
