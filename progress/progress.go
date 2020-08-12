@@ -73,6 +73,25 @@ func (mon *Monitor) RegisterCounters(names []string) {
 	}
 }
 
+// Iteration returns the current iteration
+func (mon *Monitor) Iteration() int {
+	mon.mux.Lock()
+	defer mon.mux.Unlock()
+	return mon.iteration
+}
+
+// Count returns the current value of a counter
+func (mon *Monitor) Count(name string) int {
+	mon.mux.Lock()
+	defer mon.mux.Unlock()
+	for i := range mon.countKeys {
+		if name == mon.countKeys[i] {
+			return mon.countIterations[i]
+		}
+	}
+	return 0
+}
+
 // Close prints final statistics
 func (mon *Monitor) Close() {
 	mon.mux.Lock()
