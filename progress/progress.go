@@ -36,12 +36,12 @@ func (mon *Monitor) Increment(n int) {
 	mon.iteration += n
 
 	if time.Since(mon.lastTime).Seconds() > 0.5 {
-		fmt.Printf("\r%s:\t%d it", mon.description, mon.iteration)
-		fmt.Printf("\t%.f it/s", float64(mon.iteration-mon.lastIteration)/time.Since(mon.lastTime).Seconds())
+		fmt.Printf("\r%s:    %d it", mon.description, mon.iteration)
+		fmt.Printf("    %.f it/s", float64(mon.iteration-mon.lastIteration)/time.Since(mon.lastTime).Seconds())
 		for i := range mon.countKeys {
-			fmt.Printf("\t%s: %d", mon.countKeys[i], mon.countIterations[i])
+			fmt.Printf("    %s: %d", mon.countKeys[i], mon.countIterations[i])
 		}
-		fmt.Printf("\t")
+		fmt.Printf("    ")
 		mon.lastTime = time.Now()
 		mon.lastIteration = mon.iteration
 	}
@@ -94,10 +94,10 @@ func (mon *Monitor) Close() {
 	mon.mux.Lock()
 	defer mon.mux.Unlock()
 
-	fmt.Printf("\r%s:\t%d it", mon.description, mon.iteration)
-	fmt.Printf("\t%.f it/s", float64(mon.iteration)/time.Since(mon.startTime).Seconds())
+	fmt.Printf("\r%s:    %d it", mon.description, mon.iteration)
+	fmt.Printf("    %.f it/s", float64(mon.iteration)/time.Since(mon.startTime).Seconds())
 	for i := range mon.countKeys {
-		fmt.Printf("\t%s: %d", mon.countKeys[i], mon.countIterations[i])
+		fmt.Printf("    %s: %d", mon.countKeys[i], mon.countIterations[i])
 	}
-	fmt.Printf("\t\n")
+	fmt.Printf("    \n")
 }

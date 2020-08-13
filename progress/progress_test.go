@@ -9,7 +9,7 @@ import (
 
 func TestIteration(t *testing.T) {
 
-	fmt.Println("Expecting:\t10 it\t4 it/s")
+	fmt.Println("Expecting:   10 it    4 it/s")
 	mon := NewMonitor("Progress")
 	for i := 0; i < 10; i++ {
 		mon.Increment(1)
@@ -21,7 +21,7 @@ func TestIteration(t *testing.T) {
 
 func TestCounter(t *testing.T) {
 
-	fmt.Println("Expecting:\t10 it\t4 it/s\terror: 4")
+	fmt.Println("Expecting:   10 it    4 it/s    error: 4")
 	mon := NewMonitor("Progress")
 	for i := 0; i < 10; i++ {
 		mon.Increment(1)
@@ -36,7 +36,7 @@ func TestCounter(t *testing.T) {
 
 func TestTwoCounters(t *testing.T) {
 
-	fmt.Println("Expecting:\t10 it\t4 it/s\ttoo big: 3\ttoo small: 4")
+	fmt.Println("Expecting:   10 it    4 it/s    too big: 3    too small: 4")
 	mon := NewMonitor("Progress")
 	mon.StartCounter("too big")
 	mon.StartCounter("too small")
@@ -56,7 +56,7 @@ func TestTwoCounters(t *testing.T) {
 
 func TestConcurrentCounter(t *testing.T) {
 
-	fmt.Println("Expecting:\t20 it\t8 it/s\terror: 8")
+	fmt.Println("Expecting:   20 it    8 it/s    error: 8")
 	var wg sync.WaitGroup
 	mon := NewMonitor("Progress")
 	for j := 0; j < 2; j++ {
