@@ -38,7 +38,8 @@ func TestTwoCounters(t *testing.T) {
 
 	fmt.Println("Expecting:\t10 it\t4 it/s\ttoo big: 3\ttoo small: 4")
 	mon := NewMonitor("Progress")
-	mon.StartCounters([]string{"too big", "too small"})
+	mon.StartCounter("too big")
+	mon.StartCounter("too small")
 	for i := 0; i < 10; i++ {
 		mon.Increment(1)
 		if i < 4 {
